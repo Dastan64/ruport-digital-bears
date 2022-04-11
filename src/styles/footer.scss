@@ -1,0 +1,10 @@
+.footer {
+    flex-shrink: 0;
+    background-color: $darkGreen;
+    color: $white;
+    padding: 20px;
+    &__caption {
+        text-align: center;
+        font-size: 1.25rem;
+    }
+}

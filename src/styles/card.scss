@@ -1,0 +1,63 @@
+.card {
+    border-radius: 6px;
+    max-width: 220px;
+    &--highlighted {
+        & .card__content {
+            background-color: $blue;
+            color: $white;
+        }
+        & .card__description,
+        .card__title {
+            color: $white;
+        }
+        & .card__btn--reject {
+            border: 2px solid $white;
+        }
+    }
+    &__image {
+        display: block;
+        width: 220px;
+        height: 146px;
+        object-fit: cover;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+    }
+    &__content {
+        padding: 20px;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+        background-color: $white;
+    }
+    &__title {
+        margin-bottom: 10px;
+        color: $smoke;
+        font-size: 1.125rem;
+        line-height: 22px;
+        text-align: center;
+    }
+    &__description {
+        color: $lightGrey;
+        font-size: 0.875rem;
+        text-align: center;
+    }
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    &__btn {
+        padding: 8px 60px;
+        border: none;
+        border-radius: 16px;
+        cursor: pointer;
+        &--accept {
+            background-color: $lightGreen;
+            color: $blue;
+        }
+        &--reject {
+            background-color: $blue;
+            color: $white;
+        }
+    }
+}

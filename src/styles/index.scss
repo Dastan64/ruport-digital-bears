@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@import "fonts";
+@import "colors";
+@import "header";
+@import "footer";
+@import "check";
+@import "card";
+@import "popup";
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: "Museo Regular", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: $bodyBg;
+}
+
+[data-type="accepted"] {
+    cursor: pointer;
+}
+
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    max-width: 1920px;
+    margin: 0 auto;
+}
+
+.main {
+    flex: 1 0 auto;
+    padding: 20px;
+    &__heading {
+        color: $smoke;
+    }
+    &__top-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    &__options {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+    &__checkbox-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    &__select {
+        padding: 10px;
+        font-family: "Museo Regular", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+    &__cards-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin-top: 30px;
+        @media screen and (max-width: 1000px) {
+            justify-items: center;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        }
+    }
+}

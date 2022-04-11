@@ -1,0 +1,13 @@
+.header {
+    background-color: $darkGreen;
+    color: $white;
+    &__logo-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 20px;
+        p {
+            font-size: 1.25rem;
+        }
+    }
+}

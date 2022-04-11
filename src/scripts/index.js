@@ -13,7 +13,7 @@ const acceptedBears = [], declinedBears = [];
 let cards;
 
 window.addEventListener("load", () => {
-    if (cardsContainer.childNodes.length === 0) {
+    if (cardsContainer.children.length === 0) {
         cardsContainer.insertAdjacentHTML('beforebegin', `
         <img class="main__loader" style="display: block; margin: 20px auto;" width="300" height="300" src=${loader} alt="">
         `)
@@ -25,14 +25,13 @@ window.addEventListener("load", () => {
     }).catch(error => console.error(error))
 })
 
-const placeBear = (bearId, category) => {
+const findAndPlaceBear = (bearId, category) => {
     const specificBear = cards.find(card => card.id === bearId);
     category.push(specificBear);
 };
 
 const generateCards = (cards, type) => {
-    console.log(cards);
-    cardsContainer.innerHTML = ``;
+    cardsContainer.innerHTML = "";
     if (type === "accepted") {
         cards.forEach(card => {
             const cardElement = document.createElement("article");
@@ -126,25 +125,39 @@ const generatePopup = (item) => {
 
 checkbox.addEventListener("change", () => {
     if (checkbox.checked) {
-        let filteredCards;
         switch (select.value) {
             case "planned-bears":
-                filteredCards = cards.filter(card => card.in_reserve)
-                generateCards(filteredCards)
+                filterReservedBearsByCategory(cards)
                 break;
 
             case "accepted-bears":
-                filteredCards = acceptedBears.filter(card => card.in_reserve)
-                generateCards(filteredCards, "accepted")
+                filterReservedBearsByCategory(acceptedBears, "accepted")
                 break;
 
             case "declined-bears":
-                filteredCards = declinedBears.filter(card => card.in_reserve);
                 filterReservedBearsByCategory(declinedBears)
                 break;
 
             default:
-                filteredCards = cards.filter(card => card.in_reserve)
+                filterReservedBearsByCategory(cards)
+                break;
+        }
+    }
+    else {
+        switch (select.value) {
+            case "planned-bears":
+                generateCards(cards)
+                break;
+
+            case "accepted-bears":
+                generateCards(acceptedBears, "accepted")
+                break;
+
+            case "declined-bears":
+                generateCards(declinedBears)
+                break;
+
+            default:
                 break;
         }
     }
@@ -154,6 +167,7 @@ const filterReservedBearsByCategory = (category, isAccepted) => {
     let filteredCards = category.filter(card => card.in_reserve);
     if (isAccepted === "accepted") {
         generateCards(filteredCards, "accepted")
+        return;
     }
     generateCards(filteredCards);
 }
@@ -183,7 +197,7 @@ const acceptOrRejectBear = (url, specificBearId, category) => {
         body: JSON.stringify({ id: specificBearId })
     }).then(response => {
         if (response.ok) {
-            placeBear(specificBearId, category);
+            findAndPlaceBear(specificBearId, category);
             cards = cards.filter(card => card.id !== specificBearId)
         }
     }).catch(error => console.error(error))

@@ -1,13 +1,9 @@
 import "../styles/index.scss";
 import loader from "../assets/images/loader.svg";
 
-const cardsContainer = document.querySelector('#cards-container');
-const popup = document.querySelector('.popup');
-const checkbox = document.querySelector('.check__input');
-const select = document.querySelector('.main__select');
-const heading = document.querySelector('.main__heading');
-
-const acceptedBears = [], declinedBears = [];
+import { cardsContainer, checkbox, select, heading, acceptedBears, declinedBears } from "./constants";
+import { fetchBearData } from "./fetchBearData";
+import { filterReservedBearsByCategory } from "./filterReservedBearsByCategory";
 
 let cards;
 
@@ -29,7 +25,7 @@ const findAndPlaceBear = (bearId, category) => {
     category.push(specificBear);
 };
 
-const generateCards = (cards, type) => {
+export const generateCards = (cards, type) => {
     cardsContainer.innerHTML = "";
     if (cards.length > 0) {
         if (type === "accepted") {
@@ -78,60 +74,6 @@ const generateCards = (cards, type) => {
     }
 }
 
-const fetchBearData = id => {
-    fetch(`https://private-dd610-ruporttestassignment.apiary-mock.com/get-bears/${id}`).then(response => {
-        if (response.ok) {
-            return response.json();
-        }
-        else {
-            if (response.status === 404) {
-                alert("Судя по всему, только Леонард, Миша и Клео могут рассказать о себе. Остальные стесняются.");
-                console.warn("Похоже, работают только 3 эндпоинта из 10")
-            }
-        }
-    }).then(data => {
-        const item = data.data;
-        console.log(item);
-        generatePopup(item)
-    }).catch(error => console.log(error))
-}
-
-const generatePopup = (item) => {
-    popup.classList.toggle("popup--hidden");
-    popup.innerHTML = `
-    <div class="popup">
-    <div class="popup__content">
-        <div class="popup__image-container">
-            <img width="460" height="400" class="popup__image" src=${item.image_url} alt="">
-        </div>
-        <div class="popup__info">
-            <h3 class="popup__title">${item.name}</h3>
-            <p class="popup__description">${item.type}</p>
-            <p class="popup__description">${item.gender}</p>
-            <div class="popup__text-container">
-                <p class="popup__text">${item.text}</p>
-            </div>
-            <div class="popup__buttons">
-                <button class="popup__btn popup__btn--accept" type="button">Принять</button>
-                <button class="popup__btn popup__btn--reject" type="button">Отклонить</button>
-            </div>
-        </div>
-        <button class="popup__close-btn" type="button">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19 1L1 19" stroke="white" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" />
-                <path d="M1 1L19 19" stroke="white" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" />
-            </svg>
-        </button>
-    </div>
-</div>
-    `
-    popup.querySelector(".popup__close-btn").addEventListener("click", () => {
-        popup.classList.toggle("popup--hidden")
-    })
-}
-
 checkbox.addEventListener("change", () => {
     if (checkbox.checked) {
         switch (select.value) {
@@ -171,15 +113,6 @@ checkbox.addEventListener("change", () => {
         }
     }
 })
-
-const filterReservedBearsByCategory = (category, isAccepted) => {
-    let filteredCards = category.filter(card => card.in_reserve);
-    if (isAccepted === "accepted") {
-        generateCards(filteredCards, "accepted")
-        return;
-    }
-    generateCards(filteredCards);
-}
 
 select.addEventListener("change", (e) => {
     switch (e.target.value) {

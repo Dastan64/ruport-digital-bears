@@ -1,6 +1,5 @@
 import "../styles/index.scss";
 import loader from "../assets/images/loader.svg";
-import closeIcon from "../assets/images/close-icon.svg";
 
 const cardsContainer = document.querySelector('#cards-container');
 const popup = document.querySelector('.popup');
@@ -118,7 +117,12 @@ const generatePopup = (item) => {
             </div>
         </div>
         <button class="popup__close-btn" type="button">
-            <img width="18" height="18" src=${closeIcon} alt="">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 1L1 19" stroke="white" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path d="M1 1L19 19" stroke="white" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
         </button>
     </div>
 </div>

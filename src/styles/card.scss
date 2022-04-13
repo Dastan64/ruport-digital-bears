@@ -75,10 +75,16 @@
         &--accept {
             background-color: $lightGreen;
             color: $blue;
+            &:hover {
+                background-color: $yellow;
+            }
         }
         &--reject {
             background-color: $blue;
             color: $white;
+            &:hover {
+                background-color: $darkBlue;
+            }
         }
     }
 }

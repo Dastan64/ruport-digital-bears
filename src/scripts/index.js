@@ -15,7 +15,7 @@ let cards;
 window.addEventListener("load", () => {
     if (cardsContainer.children.length === 0) {
         cardsContainer.insertAdjacentHTML('beforebegin', `
-        <img class="main__loader" style="display: block; margin: 20px auto;" width="300" height="300" src=${loader} alt="">
+        <img class="main__loader" style="display: block; margin: 20px auto;" width="200" height="200" src=${loader} alt="">
         `)
     }
     fetch("https://private-9d5e37a-testassignment.apiary-mock.com/get-bears").then(response => response.json()).then(data => {
@@ -32,11 +32,30 @@ const findAndPlaceBear = (bearId, category) => {
 
 const generateCards = (cards, type) => {
     cardsContainer.innerHTML = "";
-    if (type === "accepted") {
-        cards.forEach(card => {
-            const cardElement = document.createElement("article");
-            cardElement.innerHTML = `
-            <article class="main__card card ${card?.in_reserve ? "card--highlighted" : ""}" id=${card.id} data-type=${type}>
+    if (cards.length > 0) {
+        if (type === "accepted") {
+            cards.forEach(card => {
+                const cardElement = document.createElement("article");
+                cardElement.innerHTML = `
+                <article class="main__card card ${card?.in_reserve ? "card--highlighted" : ""}" id=${card.id} data-type=${type}>
+                <div class="card__image-container">
+                    <img width="220" height="146" class="card__image" src=${card.image_url} alt="">
+                </div>
+                <div class="card__content">
+                    <h3 class="card__title">${card.name}</h3>
+                    <p class="card__description">${card.type}</p>
+                    <p class="card__description">${card.gender}</p>
+                </div>
+            </article>
+                `
+                cardsContainer.append(cardElement);
+            })
+        }
+        else {
+            cards.forEach(card => {
+                const cardElement = document.createElement("article");
+                cardElement.innerHTML = `
+            <article class="main__card card ${card?.in_reserve ? "card--highlighted" : ""}" id=${card.id}>
             <div class="card__image-container">
                 <img width="220" height="146" class="card__image" src=${card.image_url} alt="">
             </div>
@@ -44,33 +63,19 @@ const generateCards = (cards, type) => {
                 <h3 class="card__title">${card.name}</h3>
                 <p class="card__description">${card.type}</p>
                 <p class="card__description">${card.gender}</p>
+                <div class="card__buttons">
+                    <button class="card__btn card__btn--accept" type="button">Принять</button>
+                    <button class="card__btn card__btn--reject" type="button">Отклонить</button>
+                </div>
             </div>
         </article>
             `
-            cardsContainer.append(cardElement);
-        })
+                cardsContainer.append(cardElement);
+            })
+        }
     }
     else {
-        cards.forEach(card => {
-            const cardElement = document.createElement("article");
-            cardElement.innerHTML = `
-        <article class="main__card card ${card?.in_reserve ? "card--highlighted" : ""}" id=${card.id}>
-        <div class="card__image-container">
-            <img width="220" height="146" class="card__image" src=${card.image_url} alt="">
-        </div>
-        <div class="card__content">
-            <h3 class="card__title">${card.name}</h3>
-            <p class="card__description">${card.type}</p>
-            <p class="card__description">${card.gender}</p>
-            <div class="card__buttons">
-                <button class="card__btn card__btn--accept" type="button">Принять</button>
-                <button class="card__btn card__btn--reject" type="button">Отклонить</button>
-            </div>
-        </div>
-    </article>
-        `
-            cardsContainer.append(cardElement);
-        })
+        cardsContainer.innerHTML = "<h2>Медведей нет, но вы держитесь!</h2>";
     }
 }
 

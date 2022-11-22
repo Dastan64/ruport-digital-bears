@@ -1,7 +1,7 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 @import "fonts";
@@ -14,62 +14,72 @@
 
 html,
 body {
-    height: 100%;
+  height: 100%;
 }
 
 body {
-    font-family: "Museo Regular", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background-color: $bodyBg;
+  font-family: "Museo", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: $bodyBg;
+}
+
+button, select {
+  font-family: "Museo", "Segoe UI", sans-serif;
 }
 
 [data-type="accepted"] {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .wrapper {
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-    max-width: 1920px;
-    margin: 0 auto;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 1920px;
+  margin: 0 auto;
 }
 
 .main {
-    flex: 1 0 auto;
-    padding: 20px;
-    &__heading {
-        color: $smoke;
+  flex: 1 0 auto;
+  padding: 20px;
+
+  &__heading {
+    color: $smoke;
+  }
+
+  &__top-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  &__options {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+
+  &__checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__select {
+    font-size: 0.875rem;
+    padding: 10px;
+  }
+
+  &__cards-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+    @media screen and (max-width: 1000px) {
+      justify-items: center;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     }
-    &__top-container {
-        display: flex;
-        justify-content: space-between;
-        gap: 20px;
-        flex-wrap: wrap;
-        align-items: center;
-    }
-    &__options {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 30px;
-    }
-    &__checkbox-container {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    &__select {
-        padding: 10px;
-        font-family: "Museo Regular", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    }
-    &__cards-container {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-        margin-top: 30px;
-        @media screen and (max-width: 1000px) {
-            justify-items: center;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        }
-    }
+  }
 }

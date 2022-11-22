@@ -1,101 +1,118 @@
 .popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background: rgba(14, 68, 71, 0.201377);
+  backdrop-filter: blur(81.5485px);
+  overflow-y: auto;
+  z-index: 2;
+
+  &--hidden {
+    display: none;
+  }
+
+  &__content {
+    position: relative;
+    max-width: 460px;
+    background-color: $white;
+    @media screen and (max-width: 575px) {
+      max-width: 100%;
+    }
+  }
+
+  &__info {
+    padding: 30px;
+  }
+
+  &__image {
+    display: block;
+    width: 460px;
+    height: 400px;
+    object-fit: cover;
+    @media screen and (max-width: 575px) {
+      width: 100%;
+    }
+  }
+
+  &__title {
+    margin-bottom: 10px;
+    color: $dark;
+    font-size: 1.5rem;
+    line-height: 29px;
+  }
+
+  &__description {
+    margin-bottom: 10px;
+    color: $textDark;
+    font-size: 1.125rem;
+  }
+
+  &__text-container {
+    margin-top: 16px;
+  }
+
+  &__text {
+    line-height: 1.5;
+    color: $textDark;
+  }
+
+  &__buttons {
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding-top: 80px;
-    padding-bottom: 80px;
-    background: rgba(14, 68, 71, 0.201377);
-    backdrop-filter: blur(81.5485px);
-    overflow-y: auto;
-    z-index: 2;
-    &--hidden {
-        display: none;
+    gap: 40px;
+    margin-top: 36px;
+    @media screen and (max-width: 575px) {
+      flex-direction: column;
+      gap: 20px;
     }
-    &__content {
-        position: relative;
-        max-width: 460px;
-        background-color: $white;
-        @media screen and (max-width: 575px) {
-            max-width: 100%;
-        }
+  }
+
+  &__btn {
+    padding: 8px 60px;
+    border: none;
+    border-radius: 16px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    @media screen and (max-width: 575px) {
+      width: 100%;
     }
-    &__info {
-        padding: 30px;
+
+    &--accept {
+      background-color: $lightGreen;
+      color: $blue;
     }
-    &__image {
-        display: block;
-        width: 460px;
-        height: 400px;
-        object-fit: cover;
-        @media screen and (max-width: 575px) {
-            width: 100%;
-        }
+
+    &--reject {
+      background-color: $blue;
+      color: $white;
     }
-    &__title {
-        margin-bottom: 10px;
-        color: $dark;
-        font-size: 1.5rem;
-        line-height: 29px;
+  }
+
+  &__close-btn {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 0;
+    right: -30px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    &:hover {
+      svg path {
+        stroke: $yellow;
+      }
     }
-    &__description {
-        color: $textDark;
-        font-size: 1.125rem;
+
+    @media screen and (max-width: 575px) {
+      top: 10px;
+      right: 20px;
     }
-    &__text-container {
-        margin-top: 16px;
-    }
-    &__text {
-        color: $textDark;
-    }
-    &__buttons {
-        display: flex;
-        gap: 40px;
-        margin-top: 36px;
-        @media screen and (max-width: 575px) {
-            flex-direction: column;
-            gap: 20px;
-        }
-    }
-    &__btn {
-        padding: 8px 60px;
-        border: none;
-        border-radius: 16px;
-        font-size: 0.875rem;
-        cursor: pointer;
-        @media screen and (max-width: 575px) {
-            width: 100%;
-        }
-        &--accept {
-            background-color: $lightGreen;
-            color: $blue;
-        }
-        &--reject {
-            background-color: $blue;
-            color: $white;
-        }
-    }
-    &__close-btn {
-        width: 18px;
-        height: 18px;
-        position: absolute;
-        top: 0;
-        right: -30px;
-        border: none;
-        background-color: transparent;
-        cursor: pointer;
-        &:hover {
-            svg path {
-                stroke: $yellow;
-            }
-        }
-        @media screen and (max-width: 575px) {
-            top: 10px;
-            right: 20px;
-        }
-    }
+  }
 }

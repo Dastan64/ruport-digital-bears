@@ -16,6 +16,7 @@
     "autoprefixer": "^10.4.0",
     "babel-loader": "^8.2.3",
     "css-loader": "^6.5.1",
+    "gh-pages": "^4.0.0",
     "group-css-media-queries-loader": "^4.3.0",
     "html-loader": "^3.0.1",
     "html-webpack-plugin": "^5.5.0",
